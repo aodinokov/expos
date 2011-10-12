@@ -7,11 +7,11 @@ endif
 
 BUILD_TYPE=release
 ifeq ($(BUILD_TYPE),debug)
-BUILD_DIR=debug
+BUILD_DIR=debug-$(CC)
 BUILD_CFLAGS=-g -O0
 else
 ifeq ($(BUILD_TYPE),release)
-BUILD_DIR=release
+BUILD_DIR=release-$(CC)
 BUILD_CFLAGS=-O3
 else
 $(error Invalid build type)
@@ -58,7 +58,6 @@ include src/check_ext/module.mk
 targets: $(TARGETS)
 
 unittests: FORCE $(UNITTESTS)
-	#for i in $(UNITTESTS); do ./$$i; done
 	-for i in $(UNITTESTS); do ./$$i; done
 
 all: targets unittests
