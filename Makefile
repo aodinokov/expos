@@ -57,7 +57,7 @@ include src/check_ext/module.mk
 
 targets: $(TARGETS)
 
-unittests: FORCE
+unittests: FORCE $(UNITTESTS)
 	#for i in $(UNITTESTS); do ./$$i; done
 	-for i in $(UNITTESTS); do ./$$i; done
 
