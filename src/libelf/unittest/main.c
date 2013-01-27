@@ -1,5 +1,5 @@
 
-void ts1(void);
+int ts1(void);
 
 int main(){
     ts1();

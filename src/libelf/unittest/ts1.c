@@ -34,7 +34,7 @@ START_TEST(elf_kind_object) {
 
 }END_TEST
 
-void ts1(void){
+int ts1(void){
     return run_suite(
 	START_SUITE(ts1){
 		ADD_CASE(
