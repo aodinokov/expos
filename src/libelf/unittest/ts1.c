@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 START_TEST(elf_ver_ck) {
 	fail_unless(elf_version(EV_CURRENT) != EV_NONE, "can't set version");
