@@ -58,7 +58,8 @@ FORCE:
 
 include src/check/module.mk
 include src/check_ext/module.mk
-include src/libelf/module.mk
+include src/libvfs/module.mk
+#include src/libelf/module.mk
 
 
 targets: $(TARGETS)

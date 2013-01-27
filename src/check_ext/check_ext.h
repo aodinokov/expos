@@ -14,6 +14,32 @@
 	CK_ONLY_TEST=X
 */
 
+/*
+ * Example of suite declaration:
+int main(void){
+	return RUN_SUITE(
+		START_SUITE(test1){
+			ADD_CASE(
+				START_CASE(smoke){
+					FIXTURE(_setup1, _teardown1, 1);
+					TIMEOUT(10);
+					ADD_TEST(test_xxx);
+					ADD_TEST(test_yyy);
+				}END_CASE
+			);
+			ADD_CASE(
+				START_CASE(core){
+					FIXTURE(_setup2, _teardown2, 1);
+					TIMEOUT(5);
+					ADD_TEST(test_div_by_zero);
+					ADD_TEST(test_div_by_zero1);
+				}END_CASE
+			);
+		}END_SUITE
+	);
+}
+*/
+
 #ifndef CHECK_EXT_NO_RE
 #include <stdio.h>
 #include <sys/types.h>
@@ -97,47 +123,6 @@ int static inline run_suite(Suite *suite) {
 	srunner_free (sr);
 	return nr_failed;
 }
-
-/*
- * Example of suite declaration:
-int main(void){
-	return RUN_SUITE(
-		START_SUITE(test1){
-			ADD_CASE(
-				START_CASE(smoke){
-					FIXTURE(_setup1, _teardown1, 1);
-					TIMEOUT(10);
-					ADD_TEST(test_xxx);
-					ADD_TEST(test_yyy);
-				}END_CASE
-			);
-			ADD_CASE(
-				START_CASE(core){
-					FIXTURE(_setup2, _teardown2, 1);
-					TIMEOUT(5);
-					ADD_TEST(test_div_by_zero);
-					ADD_TEST(test_div_by_zero1);
-				}END_CASE
-			);
-		}END_SUITE
-	);
-}
- */
-
-//Doesn't work make ADD_CASE as static inline
-//#define START_MAIN_CASE(_suite_, _case_) \
-//int main(void) { \
-//	return run_suite( \
-//		START_SUITE(_suite_){ \
-//			ADD_CASE( \
-//				START_CASE(_case_)
-//
-//#define END_MAIN_CASE \
-//				END_CASE \
-//			); \
-//		}END_SUITE \
-//	); \
-//}
 
 #ifndef CHECK_EXT_NO_RE
 
