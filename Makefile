@@ -5,7 +5,7 @@ OLDSHELL := $(SHELL)
 SHELL = $(info Building $@ $(if $?,(which depends on $?)))$(OLDSHELL)
 endif
 
-BUILD_TYPE:=release
+BUILD_TYPE:=debug
 ifeq ($(BUILD_TYPE),debug)
 BUILD_DIR:=debug-$(CC)
 BUILD_CFLAGS:=-g -O0
@@ -65,7 +65,7 @@ include src/libvfs/module.mk
 targets: $(TARGETS)
 
 unittests: FORCE $(UNITTESTS)
-	-for i in $(UNITTESTS); do (cd `dirname $$i`; LD_LIBRARY_PATH=`pwd` ./`basename $$i`; ) done
+	for i in $(UNITTESTS); do (cd `dirname $$i`; LD_LIBRARY_PATH=`pwd` ./`basename $$i`; ) done
 
 all: targets unittests
 

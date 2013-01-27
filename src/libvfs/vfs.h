@@ -10,10 +10,17 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/mount.h>
 #include <unistd.h>
 #include <fcntl.h>
 
+// Documentation/filesystems/path-lookup.txt
 //TODO: mode_t, struct stat
+int 		vfs_mount(const char *source, const char *target,
+                 const char *filesystemtype, unsigned long mountflags,
+                 const void *data);
+int 		vfs_umount(const char *target);
+int 		vfs_umount2(const char *target, int flags);
 
 int 		vfs_open(const char *pathname, int flags, mode_t mode);
 int 		vfs_creat(const char *pathname, mode_t mode);
