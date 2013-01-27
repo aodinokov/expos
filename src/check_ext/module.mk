@@ -12,10 +12,10 @@ $(call map_dst_src_deps.c,$(BUILD_DIR)/check_ext,src/check_ext,)
 
 -include $($(MODULE)_objects:.o=.d)
 
-$(call ld_target,$(BUILD_DIR)/check_ext_example,\
+$(call ld_target,$(BUILD_DIR)/check_ext/check_ext_example,\
 						$($(MODULE)_objects) \
 						$(BUILD_DIR)/check/install/usr/lib/libcheck.a)
 
-UNITTESTS+=$(BUILD_DIR)/check_ext_example
+UNITTESTS+=$(BUILD_DIR)/check_ext/check_ext_example
 
 include post.mk

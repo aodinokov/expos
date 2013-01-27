@@ -5,23 +5,27 @@ OLDSHELL := $(SHELL)
 SHELL = $(info Building $@ $(if $?,(which depends on $?)))$(OLDSHELL)
 endif
 
-BUILD_TYPE=release
+BUILD_TYPE:=release
 ifeq ($(BUILD_TYPE),debug)
-BUILD_DIR=debug-$(CC)
-BUILD_CFLAGS=-g -O0
+BUILD_DIR:=debug-$(CC)
+BUILD_CFLAGS:=-g -O0
 else
 ifeq ($(BUILD_TYPE),release)
-BUILD_DIR=release-$(CC)
-BUILD_CFLAGS=-O3
+BUILD_DIR:=release-$(CC)
+BUILD_CFLAGS:=-O3
 else
 $(error Invalid build type)
 endif
 endif
 BUILD_CFLAGS+=-DHAVE_CONFIG_H -fpic
-BUILD_LDFLAG=-fpic
-BUILD_VER=0.1
+BUILD_LDFLAG:=-fpic
+BUILD_VER:=0.1
 
-LD=$(CC)
+ifeq ($(TARGET_CC),)
+TARGET_CC:=$(CC)
+endif
+LD:=$(CC)
+TARGET_LD:=$(TARGET_CC)
 
 #TODO: -MG  $1/%.d
 define map_dst_src_deps_template.c
@@ -54,6 +58,8 @@ FORCE:
 
 include src/check/module.mk
 include src/check_ext/module.mk
+include src/libelf/module.mk
+
 
 targets: $(TARGETS)
 

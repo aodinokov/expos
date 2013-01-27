@@ -69,8 +69,4 @@ $(BUILD_DIR)/check/diff: \
 
 .PHONY: $(BUILD_DIR)/check/workspace $(BUILD_DIR)/check/diff
 
-#TARGETS+=$(BUILD_DIR)/check/install/.dir
-$(BUILD_DIR)/check/install/usr/lib/libcheck.so: $(BUILD_DIR)/check/install/.dir
-
-
 include post.mk
