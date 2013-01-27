@@ -16,6 +16,6 @@ $(call ld_target,$(BUILD_DIR)/check_ext/check_ext_example,\
 						$($(MODULE)_objects) \
 						$(BUILD_DIR)/check/install/usr/lib/libcheck.a)
 
-UNITTESTS+=$(BUILD_DIR)/check_ext/check_ext_example
+#UNITTESTS+=$(BUILD_DIR)/check_ext/check_ext_example
 
 include post.mk

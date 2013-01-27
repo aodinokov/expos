@@ -64,7 +64,7 @@ include src/libelf/module.mk
 targets: $(TARGETS)
 
 unittests: FORCE $(UNITTESTS)
-	-for i in $(UNITTESTS); do ./$$i; done
+	-for i in $(UNITTESTS); do (cd `dirname $$i`; LD_LIBRARY_PATH=`pwd` ./`basename $$i`; ) done
 
 all: targets unittests
 
