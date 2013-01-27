@@ -89,6 +89,7 @@ $(BUILD_DIR)/libelf/ut/libelf.so: $(BUILD_DIR)/libelf/ut/libelf.so.$(BUILD_VER)
 #Unittests
 $(MODULE)_objects_unittest:=$($(MODULE)_sourses_unittest:%.c=$(BUILD_DIR)/libelf/ut/%.o)
 $(BUILD_DIR)/libelf/ut/unittest/%: CFLAGS=-I. -Isrc -I$(BUILD_DIR)/check/install/usr/include -Isrc/check_ext $(BUILD_CFLAGS)
+$($(MODULE)_objects_unittest):$(BUILD_DIR)/check/install/.dir
 $(call map_dst_src_deps.c,$(BUILD_DIR)/libelf/ut/unittest,src/libelf/unittest,)
 -include $($(MODULE)_objects_unittest:.o=.d)
 $(call ld_target,$(BUILD_DIR)/libelf/ut/test_libelf,\
