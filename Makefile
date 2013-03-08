@@ -90,7 +90,7 @@ $(CSCOPE_DIR)/cscope.out: $(CSCOPE_DIR)/cscope.files
 
 cscope: $(CSCOPE_DIR)/cscope.out
 
-all: targets cscope unittests
+all: targets unittests
 
 clean:
 		rm -rf $(BUILD_DIR)/*
