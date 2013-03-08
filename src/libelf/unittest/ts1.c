@@ -60,7 +60,7 @@ START_TEST(elf_read_exec) {
 
 int ts1(void){
     return run_suite(
-	START_SUITE(ts1){
+	START_SUITE(libelf_basic){
 		ADD_CASE(
 			START_CASE(elf_basic){
 				ADD_TEST(elf_kind_object);

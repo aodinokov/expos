@@ -56,20 +56,43 @@ default: all
 
 FORCE:
 
+# to make these variables immidiate
+TARGETS:=
+UNITTESTS:=
+
 include src/check/module.mk
 include src/check_ext/module.mk
+include src/liblog/module.mk
 include src/libvfs/module.mk
-#include src/libelf/module.mk
+include src/libelf/module.mk
 
 
 targets: $(TARGETS)
 
 unittests: FORCE $(UNITTESTS)
-	for i in $(UNITTESTS); do (cd `dirname $$i`; LD_LIBRARY_PATH=`pwd` ./`basename $$i`; ) done
+	@res=0; \
+	for i in $(UNITTESTS); do \
+		(cd `dirname $$i`; LD_LIBRARY_PATH=`pwd` ./`basename $$i`); \
+		tmp=$$?; if [ $$tmp -ne 0 ]; then res=$$tmp; fi; \
+	done; \
+	if [ $$res -ne 0 ]; then echo "One or more unit-tests finished with an error. Build failed." >&2; exit $$res; fi
 
-all: targets unittests
+# it's temporary solution - better to allow modules to decide which paths/files is necessary to add as soursedir
+# TODO: compare current filelist with previous and modify cscope.files in that case
+#previous approach: SOURCEDIRS=`find ./src -type d | sed ':a;N;$$!ba;s/\n/:/g'` cscope </dev/null 2>&1 1>/dev/null
+CSCOPE_DIR=cscope
+$(CSCOPE_DIR)/cscope.files: FORCE
+	@mkdir -p $(@D)
+	find `pwd`/src -name '*.[ch]*' >$@
+
+$(CSCOPE_DIR)/cscope.out: $(CSCOPE_DIR)/cscope.files
+	cd $(^D) && cscope -b -q
+
+cscope: $(CSCOPE_DIR)/cscope.out
+
+all: targets cscope unittests
 
 clean:
 		rm -rf $(BUILD_DIR)/*
 
-.PHONY: clean all FORCE targets unittests
+.PHONY: clean all FORCE targets unittests cscope

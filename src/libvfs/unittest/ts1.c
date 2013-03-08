@@ -39,7 +39,7 @@ START_TEST(vfs_test_open_close) {
 
 int ts1(void){
     return run_suite(
-	START_SUITE(ts1){
+	START_SUITE(libvfs_basic){
 		ADD_CASE(
 			START_CASE(vfs_basic){
 				ADD_TEST(vfs_test_reg_unreg);
