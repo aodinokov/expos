@@ -93,6 +93,6 @@ cscope: $(CSCOPE_DIR)/cscope.out
 all: targets unittests
 
 clean:
-		rm -rf $(BUILD_DIR)/*
+		rm -rf $(BUILD_DIR)/* $(CSCOPE_DIR)/*
 
 .PHONY: clean all FORCE targets unittests cscope
