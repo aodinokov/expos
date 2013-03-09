@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <sys/types.h> /*getpid*/
+#include <unistd.h>
 
 extern char	*__progname;		/* Program name, from crt0. */
 

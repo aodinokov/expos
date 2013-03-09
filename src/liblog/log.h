@@ -12,8 +12,6 @@
 #include "config.h"
 #endif /*HAVE_CONFIG*/
 
-#define LOG_ENGINE esyslog
-
 #ifndef LOG_ENGINE
 
 /* log importancy */
