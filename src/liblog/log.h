@@ -12,6 +12,8 @@
 #include "config.h"
 #endif /*HAVE_CONFIG*/
 
+#define LOG_ENGINE esyslog
+
 #ifndef LOG_ENGINE
 
 /* log importancy */
@@ -55,6 +57,42 @@
 #if LOG_ENGINE == esyslog
 
 #include "esyslog/esyslog.h"
+
+/* log importancy */
+#define LOG_IMP_EMERG	esgiEmerg
+#define LOG_IMP_ALERT	esgiAlert
+#define LOG_IMP_CRIT	esgiCrit
+#define LOG_IMP_ERR 	esgiErr
+#define LOG_IMP_WARN 	esgiWarn
+#define LOG_IMP_NOTICE 	esgiNotice
+#define LOG_IMP_INFO 	esgiInfo
+#define LOG_IMP_DEBUG 	esgiDebug
+
+/* log level */
+#define	LOG_LVL_NONE 	ESYSLOG_LVL_NONE
+#define	LOG_LVL_EMERG 	ESYSLOG_LVL_EMERG
+#define	LOG_LVL_ALERT 	ESYSLOG_LVL_ALERT
+#define	LOG_LVL_CRIT 	ESYSLOG_LVL_CRIT
+#define	LOG_LVL_ERR 	ESYSLOG_LVL_ERR
+#define	LOG_LVL_WARN 	ESYSLOG_LVL_WARN
+#define	LOG_LVL_NOTICE 	ESYSLOG_LVL_NOTICE
+#define	LOG_LVL_INFO 	ESYSLOG_LVL_INFO
+#define	LOG_LVL_DEBUG 	ESYSLOG_LVL_DEBUG
+
+#define	LOG_MODULE_DECLARE(_name) ESYSLOG_MODULE_DECLARE(_name)
+#define	LOG_GROUP_DECLARE(_name) ESYSLOG_GROUP_DECLARE(_name)
+#define	LOG_MODULE_CREATE(_name) ESYSLOG_MODULE_CREATE(_name)
+#define	LOG_GROUP_CREATE_LVL(_name, _level) ESYSLOG_GROUP_CREATE_LVL(_name, _level)
+#define	LOG_GROUP_CREATE(_name) LOG_GROUP_CREATE_LVL(_name, LOG_LVL_DEFAULT)
+
+#define LOG_GROUP_GET_LVL(_name) ESYSLOG_GROUP_GET_LVL(_name)
+#define LOG_GROUP_SET_LVL(_name, _level) ESYSLOG_GROUP_SET_LVL(_name, _level)
+
+#define LOG_MODULE_INIT(_name) ESYSLOG_MODULE_INIT(_name)
+#define LOG_MODULE_UNINIT(_name) ESYSLOG_MODULE_UNINIT(_name)
+
+#define LOG(_name, _importance, _arg...) ESYSLOG(_name, _importance, _arg)
+#define LOG_V(_name, _importance, _fmt, _ap) VESYSLOG(_name, _importance, _fmt, _ap)
 
 #endif /*LOG_ENGINE == esyslog*/
 #endif /*LOG_ENGINE*/

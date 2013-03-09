@@ -1,0 +1,27 @@
+/*
+ * libesyslog2file_ep.c
+ *
+ *  Created on: Oct 20, 2010
+ *      Author: mralex
+ */
+
+#include "libesyslog2file.h"
+#include "stdio.h" /*NULL*/
+
+static void* _pSyslogHandle = NULL;
+
+__attribute__((constructor))
+static void initialize_lib() {
+	_pSyslogHandle =
+		esyslog_registerBackend(ESyslog_FileBackendCreate(NULL));
+
+}
+
+__attribute__((destructor))
+static void destroy_lib() {
+
+	if (_pSyslogHandle) {
+		esyslog_unregisterBackend(_pSyslogHandle);
+		_pSyslogHandle = NULL;
+	}
+}
